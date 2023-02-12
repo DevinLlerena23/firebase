@@ -13,7 +13,13 @@ function App() {
   const [responsable, setNuevoResponsable] = useState("");
   const [prioridad, setNuevaPrioridad] = useState("");
   const [guardado,setGuardado]=useState(false)
-  
+  const [titulo2, setNuevoti] = useState("");
+  const [descripcion2, setNuevade] = useState("");
+  const [responsable2, setNuevore] = useState("");
+  const [prioridad2, setNuevapri] = useState("");
+  const [id, setnuevoID] = useState(null);
+
+
 
   const tareasColeccionRef = collection(db, "tareas");
 
@@ -32,13 +38,36 @@ function App() {
     const nuevaTarea = {
       titulo, descripcion, responsable, prioridad
     }
-    /*const nuevaTarea={
-      "titulo":titulo,"descripcion":descripcion,"responsable":responsable,"prioridad":prioridad
+
+    const nuevaTarea2 = {
+      titulo: titulo2,
+      descripcion: descripcion2,
+      responsable: responsable2,
+      prioridad: prioridad2,
+    };
+
+    if (id) {
+      const docRef = doc(db, "tareas", id);
+      await updateDoc(docRef, nuevaTarea2);
+      setnuevoID("");
+      setNuevoti("");
+      setNuevade("");
+      setNuevapri("");
+      setNuevore("");
+    } else {
+      await addDoc(tareasColeccionRef, nuevaTarea); //guarda la tarea en la firestore
+      setNuevoTitulo("");
+      setNuevaDescripcion("");
+      setNuevaPrioridad("");
+      setNuevoResponsable("");
     }
-    */
-    await addDoc(tareasColeccionRef, nuevaTarea);//guarda la tarea en firestore
-    setGuardado(true)
+    setGuardado(true);
+    
+    
+   
   }
+
+  
 
 const eliminarClick = async (item) => {
   if (window.confirm("¿Estás seguro de que quieres eliminar esto?")) {
@@ -46,7 +75,17 @@ const eliminarClick = async (item) => {
     await deleteDoc(docRef);
   }
   setGuardado(true);
-};
+  };
+  
+  const editarClick = (item) => {
+    setnuevoID(item.id);
+    console.log(item.id);
+    console.log(item.titulo);
+    setNuevoti(item.titulo);
+    setNuevade(item.descripcion);
+    setNuevore(item.responsable);
+    setNuevapri(item.prioridad);
+  };
 
 
   return (
@@ -66,11 +105,25 @@ const eliminarClick = async (item) => {
           />
         </div>
         <div className="col-2">
-          <Actualizar />
+          <Actualizar
+            guardarRegistro={guardarRegistro}
+            setNuevoTitulo={setNuevoti}
+            setNuevaDescripcion={setNuevade}
+            setNuevoResponsable={setNuevore}
+            setNuevaPrioridad={setNuevapri}
+            titulo={titulo2}
+            descripcion={descripcion2}
+            responsable={responsable2}
+            prioridad={prioridad2}
+          />
         </div>
       </div>
 
-      <Tareas tareas={tareas} eliminarClick={eliminarClick} />
+      <Tareas
+        tareas={tareas}
+        eliminarClick={eliminarClick}
+        editarClick={editarClick}
+      />
     </div>
   );
 }

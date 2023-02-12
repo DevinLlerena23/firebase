@@ -51,7 +51,7 @@ export default function Actualizar(props) {
                   className="form-control"
                   name="prioridad"
                   placeholder="ingresa la prioridad"
-                  value={props.priodidad}
+                  value={props.prioridad}
                   onChange={(event) =>
                     props.setNuevaPrioridad(event.target.value)
                   }

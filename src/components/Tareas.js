@@ -5,6 +5,10 @@ export default function Tareas(props) {
   const eliminar = (item) => {
     props.eliminarClick(item);
   };
+
+   const Editar = (item) => {
+     props.editarClick(item);
+  };
   
   console.log(props.tareas);
   return (
@@ -32,6 +36,13 @@ export default function Tareas(props) {
                         onClick={() => eliminar(tarea)}
                       >
                         Eliminar
+                      </button>
+
+                      <button
+                        className="btn btn-info"
+                        onClick={() => Editar(tarea)}
+                      >
+                          Editar
                       </button>
                     </p>
                   </div>
