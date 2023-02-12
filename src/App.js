@@ -39,6 +39,16 @@ function App() {
     await addDoc(tareasColeccionRef, nuevaTarea);//guarda la tarea en firestore
     setGuardado(true)
   }
+
+const eliminarClick = async (item) => {
+  if (window.confirm("¿Estás seguro de que quieres eliminar esto?")) {
+    const docRef = doc(db, "tareas", item.id);
+    await deleteDoc(docRef);
+  }
+  setGuardado(true);
+};
+
+
   return (
     <div className="App ">
       <div className="row  justify-content-start">
@@ -60,7 +70,7 @@ function App() {
         </div>
       </div>
 
-      <Tareas tareas={tareas} />
+      <Tareas tareas={tareas} eliminarClick={eliminarClick} />
     </div>
   );
 }

@@ -1,6 +1,11 @@
 import React from "react";
 
 export default function Tareas(props) {
+
+  const eliminar = (item) => {
+    props.eliminarClick(item);
+  };
+  
   console.log(props.tareas);
   return (
     <div className="container">
@@ -22,7 +27,12 @@ export default function Tareas(props) {
                   <div className="card-footer">
                     <mark>{tarea.prioridad}</mark>
                     <p>
-                      <button className="btn btn-primary">Eliminar</button>
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => eliminar(tarea)}
+                      >
+                        Eliminar
+                      </button>
                     </p>
                   </div>
                 </div>
