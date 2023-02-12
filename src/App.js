@@ -1,15 +1,18 @@
 import { db } from './Firebase-config';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { addDoc, collection, getDocs, deleteDoc,doc,updateDoc } from "firebase/firestore";
 import './App.css';
 import { useEffect, useState } from 'react';
 import Tareas from './components/Tareas';
+import TareasAdd from './components/TareasAdd';
+import Actualizar from './components/Actualizar';
+
 function App() {
   const [tareas, setTareas] = useState([]);
   const [titulo, setNuevoTitulo] = useState("");
   const [descripcion, setNuevaDescripcion] = useState("");
   const [responsable, setNuevoResponsable] = useState("");
   const [prioridad, setNuevaPrioridad] = useState("");
-  const [guardado,setGuardado]=useState("")
+  const [guardado,setGuardado]=useState(false)
   
 
   const tareasColeccionRef = collection(db, "tareas");
@@ -37,14 +40,26 @@ function App() {
     setGuardado(true)
   }
   return (
-    <div className="App">
-      <form onSubmit={guardarRegistro}>
-        <input type='text' placeholder='Titulo' onChange={(event) => setNuevoTitulo(event.target.value)} />
-        <input type='text' placeholder='Descripcion' onChange={(event) => setNuevaDescripcion(event.target.value)} />
-        <input type='text' placeholder='Responsable' onChange={(event) => setNuevoResponsable(event.target.value)} />
-        <input type='text' placeholder='Prioridad' onChange={(event) => setNuevaPrioridad(event.target.value)} />
-        <p><button className='btn btn-primary' >Guardar</button></p>
-      </form>
+    <div className="App ">
+      <div className="row  justify-content-start">
+        <div className="col-2">
+          <TareasAdd
+            titulo={titulo}
+            descripcion={descripcion}
+            responsable={responsable}
+            prioridad={prioridad}
+            setNuevoTitulo={setNuevoTitulo}
+            setNuevaDescripcion={setNuevaDescripcion}
+            setNuevoResponsable={setNuevoResponsable}
+            setNuevaPrioridad={setNuevaPrioridad}
+            guardarRegistro={guardarRegistro}
+          />
+        </div>
+        <div className="col-2">
+          <Actualizar />
+        </div>
+      </div>
+
       <Tareas tareas={tareas} />
     </div>
   );
