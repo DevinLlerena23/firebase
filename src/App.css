@@ -1,8 +1,12 @@
 .App {
   text-align: center;
+  background-color: rgb(129, 151, 219);
 }
 
-.car{
-  width: 190px;
+
+.card{
+  color: #314e98;
 }
+
+
 

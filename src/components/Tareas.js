@@ -1,5 +1,5 @@
 import React from "react";
-
+import '../App.css'
 export default function Tareas(props) {
 
   const eliminar = (item) => {
@@ -18,11 +18,11 @@ export default function Tareas(props) {
           return (
             <div className="col-md-4" key={tarea.id}>
               <div className="justify-content-center">
-                <div className="card mt-4">
-                  <div className="card header">
+                <div className="card mt-4 ">
+                  <div className="card header car">
                     <h3>{tarea.titulo}</h3>
                   </div>
-                  <div className="card-body">
+                  <div className="card-body ">
                     <p>
                       <strong>{tarea.descripcion}</strong>
                     </p>
@@ -39,7 +39,7 @@ export default function Tareas(props) {
                       </button>
 
                       <button
-                        className="btn btn-info"
+                        className="btn btn-success"
                         onClick={() => Editar(tarea)}
                       >
                           Editar

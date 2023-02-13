@@ -6,7 +6,7 @@ export default function TareasAdd(props) {
       <div className="col">
         <form onSubmit={props.guardarRegistro}>
           <div className="card mt-4">
-            <div className="card header">
+            <div className="card header ">
               <h1>Nueva tarea</h1>
             </div>
 
